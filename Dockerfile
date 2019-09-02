@@ -3,7 +3,7 @@ FROM alpine as certs
 ARG version
 
 RUN apk update && apk add ca-certificates
-ENV CELLS_VERSION=${version}
+ENV CELLS_VERSION=1.6.2
 
 WORKDIR /pydio
 
