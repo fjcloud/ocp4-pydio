@@ -19,8 +19,8 @@ ARG version
 
 WORKDIR /pydio
 
-ENV CELLS_BIND localhost:8080
-ENV CELLS_EXTERNAL localhost:8080
+ENV CELLS_BIND 0.0.0.0:8080
+ENV CELLS_EXTERNAL pydio.apps.ocp.msl.cloud
 
 # Add necessary files
 COPY docker-entrypoint.sh /pydio/docker-entrypoint.sh
@@ -36,6 +36,5 @@ RUN ln -s /pydio/cells /bin/cells \
     && ln -s /pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
     && chmod +x /pydio/docker-entrypoint.sh
 
-VOLUME ["/root/.config"]
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["cells", "start"]
