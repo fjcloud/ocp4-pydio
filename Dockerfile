@@ -3,7 +3,7 @@ FROM alpine as certs
 
 RUN apk update && apk add ca-certificates
 
-RUN addgroup -S pydio -u 10000088 && adduser -S pydio -G pydio -u 10000088
+RUN addgroup -S pydio -g 10000088 && adduser -S pydio -G pydio -u 10000088
 
 USER pydio
 
