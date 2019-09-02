@@ -5,8 +5,8 @@ RUN apk update && apk add ca-certificates
 
 WORKDIR /pydio
 
-RUN wget "https://download.pydio.com/pub/cells/release/1.6.2/linux-amd64/cells"
-RUN wget "https://download.pydio.com/pub/cells/release/1.6.2/linux-amd64/cells-ctl"
+RUN wget "https://download.pydio.com/pub/cells/release/1.5.3/linux-amd64/cells"
+RUN wget "https://download.pydio.com/pub/cells/release/1.5.3/linux-amd64/cells-ctl"
 
 RUN chmod +x /pydio/cells
 RUN chmod +x /pydio/cells-ctl
