@@ -3,36 +3,43 @@ FROM alpine as certs
 
 RUN apk update && apk add ca-certificates
 
-WORKDIR /pydio
+RUN useradd -u 10000088 -ms /bin/bash pydio
+
+USER pydio
+
+WORKDIR /home/pydio
 
 RUN wget "https://download.pydio.com/pub/cells/release/1.5.3/linux-amd64/cells"
 RUN wget "https://download.pydio.com/pub/cells/release/1.5.3/linux-amd64/cells-ctl"
 
-RUN chmod +x /pydio/cells
-RUN chmod +x /pydio/cells-ctl
+RUN chmod +x /home/pydio/cells
+RUN chmod +x /home/pydio/cells-ctl
 
 # Creates the final image
 FROM busybox:glibc
-ARG version
 
-WORKDIR /pydio
+RUN useradd -u 10000088 -ms /bin/bash pydio
+
+USER pydio
+
+WORKDIR /home/pydio
 
 ENV CELLS_BIND 0.0.0.0:8080
 ENV CELLS_EXTERNAL pydio.apps.ocp.msl.cloud
 
 # Add necessary files
-COPY docker-entrypoint.sh /pydio/docker-entrypoint.sh
-COPY libdl.so.2 /pydio/libdl.so.2
+COPY docker-entrypoint.sh /home/pydio/docker-entrypoint.sh
+COPY libdl.so.2 /home/pydio/libdl.so.2
 COPY --from=certs /etc/ssl/certs /etc/ssl/certs
-COPY --from=certs /pydio/cells-ctl .
-COPY --from=certs /pydio/cells .
+COPY --from=certs /home/pydio/cells-ctl .
+COPY --from=certs /home/pydio/cells .
 
 # Final configuration
-RUN ln -s /pydio/cells /bin/cells \
-    && ln -s /pydio/cells-ctl /bin/cells-ctl \
-    && ln -s /pydio/libdl.so.2 /lib64/libdl.so.2 \
-    && ln -s /pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
-    && chmod +x /pydio/docker-entrypoint.sh
+RUN ln -s /home/pydio/cells /bin/cells \
+    && ln -s /home/pydio/cells-ctl /bin/cells-ctl \
+    && ln -s /home/pydio/libdl.so.2 /lib64/libdl.so.2 \
+    && ln -s /home/pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
+    && chmod +x /home/pydio/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["cells", "start"]
