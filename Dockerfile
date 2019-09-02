@@ -34,12 +34,16 @@ COPY --from=certs /etc/ssl/certs /etc/ssl/certs
 COPY --from=certs /home/pydio/cells-ctl .
 COPY --from=certs /home/pydio/cells .
 
+USER root
+
 # Final configuration
 RUN ln -s /home/pydio/cells /bin/cells \
     && ln -s /home/pydio/cells-ctl /bin/cells-ctl \
     && ln -s /home/pydio/libdl.so.2 /lib64/libdl.so.2 \
     && ln -s /home/pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
     && chmod +x /home/pydio/docker-entrypoint.sh
+    
+USER pydio
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["cells", "start"]
