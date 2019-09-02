@@ -25,7 +25,7 @@ USER pydio
 WORKDIR /home/pydio
 
 ENV CELLS_BIND 0.0.0.0:8080
-ENV CELLS_EXTERNAL pydio.apps.ocp.msl.cloud:443
+ENV CELLS_EXTERNAL https://pydio.apps.ocp.msl.cloud:443
 
 # Add necessary files
 COPY docker-entrypoint.sh /home/pydio/docker-entrypoint.sh
