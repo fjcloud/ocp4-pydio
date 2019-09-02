@@ -3,7 +3,7 @@ FROM alpine as certs
 
 RUN apk update && apk add ca-certificates
 
-RUN addgroup -S pydio -g 255001 && adduser -S pydio -G pydio -u 255001
+RUN addgroup -S pydio -g 50001 && adduser -S pydio -G pydio -u 50001
 
 USER pydio
 
@@ -18,7 +18,7 @@ RUN chmod +x /home/pydio/cells-ctl
 # Creates the final image
 FROM busybox:glibc
 
-RUN addgroup -S pydio -g 255001 && adduser -S pydio -G pydio -u 255001
+RUN addgroup -S pydio -g 50001 && adduser -S pydio -G pydio -u 50001
 
 USER pydio
 
