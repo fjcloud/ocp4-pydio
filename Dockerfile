@@ -1,16 +1,12 @@
 # handle certificate and downloads in another stage to reduce image size
 FROM alpine as certs
-ARG version
 
 RUN apk update && apk add ca-certificates
-ENV CELLS_VERSION=${version}
 
 WORKDIR /pydio
 
-RUN echo ${CELLS_VERSION}
-
-RUN wget https://download.pydio.com/pub/cells/release/${CELLS_VERSION}/linux-amd64/cells
-RUN wget https://download.pydio.com/pub/cells/release/${CELLS_VERSION}/linux-amd64/cells-ctl
+RUN wget "https://download.pydio.com/pub/cells/release/1.6.2/linux-amd64/cells"
+RUN wget "https://download.pydio.com/pub/cells/release/1.6.2/linux-amd64/cells-ctl"
 
 RUN chmod +x /pydio/cells
 RUN chmod +x /pydio/cells-ctl
