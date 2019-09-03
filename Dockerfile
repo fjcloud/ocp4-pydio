@@ -20,8 +20,6 @@ FROM busybox:glibc
 
 RUN addgroup -S pydio -g 50001 && adduser -S pydio -G pydio -u 50001
 
-USER pydio
-
 WORKDIR /home/pydio
 
 ENV CELLS_BIND 0.0.0.0:8080
@@ -33,8 +31,6 @@ COPY libdl.so.2 /home/pydio/libdl.so.2
 COPY --from=certs /etc/ssl/certs /etc/ssl/certs
 COPY --from=certs /home/pydio/cells-ctl .
 COPY --from=certs /home/pydio/cells .
-
-USER root
 
 # Final configuration
 RUN ln -s /home/pydio/cells /bin/cells \
