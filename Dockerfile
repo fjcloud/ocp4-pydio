@@ -5,18 +5,14 @@ RUN mkdir -p /app/pydio
 
 WORKDIR /app/pydio
 
-RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" -o cells \
-    && curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl" -o cells-ctl
-    
-RUN chmod +x /app/pydio/cells
-RUN chmod +x /app/pydio/cells-ctl
-
-# Add necessary files
 COPY docker-entrypoint.sh /app/pydio/docker-entrypoint.sh
 COPY libdl.so.2 /app/pydio/libdl.so.2
 
-# Final configuration
-RUN ln -s /app/pydio/cells /bin/cells \
+RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" -o cells \
+    && curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl" -o cells-ctl \
+    && chmod +x /app/pydio/cells \
+    && chmod +x /app/pydio/cells-ctl
+    && ln -s /app/pydio/cells /bin/cells \
     && ln -s /app/pydio/cells-ctl /bin/cells-ctl \
     && ln -s /app/pydio/libdl.so.2 /lib64/libdl.so.2 \
     && ln -s /app/pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
