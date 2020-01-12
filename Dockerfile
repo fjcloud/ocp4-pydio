@@ -1,7 +1,9 @@
 # handle certificate and downloads in another stage to reduce image size
 FROM image-registry.openshift-image-registry.svc:5000/openshift/rhel-minimal:latest
 
-RUN addgroup -S pydio -g 50001 && adduser -S pydio -G pydio -u 50001
+RUN groupadd -g 1000560001 pydio && adduser -g 1000560001 -u 1000560001 pydio
+
+USER pydio
 
 WORKDIR /home/pydio
 
