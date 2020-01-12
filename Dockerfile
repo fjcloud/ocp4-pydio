@@ -5,9 +5,9 @@ RUN mkdir -p /app/pydio
 
 WORKDIR /app/pydio
 
-RUN wget "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" \
-    && wget "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl"
-
+RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" -o cells \
+    && wget "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl" -o cells-ctl
+    
 RUN chmod +x /app/pydio/cells
 RUN chmod +x /app/pydio/cells-ctl
 
