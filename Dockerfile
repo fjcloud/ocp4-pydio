@@ -23,4 +23,4 @@ RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" 
     && chmod +x /home/pydio/app/cells \
     && chmod +x /home/pydio/app/cells-ctl \
 
-CMD ["./cells", "start"]
+CMD ["/home/pydio/app/cells", "start"]
