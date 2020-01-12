@@ -21,6 +21,6 @@ WORKDIR /home/pydio/app
 RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" -o cells \
     && curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl" -o cells-ctl \
     && chmod +x /home/pydio/app/cells \
-    && chmod +x /home/pydio/app/cells-ctl \
+    && chmod +x /home/pydio/app/cells-ctl
 
 CMD ["/home/pydio/app/cells", "start"]
