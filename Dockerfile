@@ -1,7 +1,7 @@
 # handle certificate and downloads in another stage to reduce image size
 FROM image-registry.openshift-image-registry.svc:5000/openshift/rhel-minimal:latest
 
-RUN microdnf --enablerepo=rhel-7-server-rpms install shadow-utils /
+RUN microdnf install http://mirror.centos.org/centos/7.7.1908/os/x86_64/Packages/shadow-utils-4.6-5.el7.x86_64.rpm /
     && useradd -rm -d /home/pydio -s /bin/bash -g root -u pydio
 
 USER pydio
