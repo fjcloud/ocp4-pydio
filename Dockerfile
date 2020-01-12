@@ -14,20 +14,15 @@ RUN curl http://mirror.centos.org/centos/7.7.1908/os/x86_64/Packages/shadow-util
 
 USER pydio
 
-RUN mkdir -p /app/pydio
+RUN mkdir -p /home/pydio/app
 
-WORKDIR /app/pydio
-
-COPY docker-entrypoint.sh /app/pydio/docker-entrypoint.sh
+WORKDIR /home/pydio/app
 
 RUN curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells" -o cells \
     && curl "https://download.pydio.com/pub/cells/release/1.6.1/linux-amd64/cells-ctl" -o cells-ctl \
-    && chmod +x /app/pydio/cells \
-    && chmod +x /app/pydio/cells-ctl \
-    && ln -s /app/pydio/cells /bin/cells \
-    && ln -s /app/pydio/cells-ctl /bin/cells-ctl \
-    && ln -s /app/pydio/docker-entrypoint.sh /bin/docker-entrypoint.sh \
-    && chmod +x /app/pydio/docker-entrypoint.sh
+    && chmod +x /home/pydio/app/cells \
+    && chmod +x /home/pydio/app/cells-ctl \
+    && ln -s /home/pydio/app/cells /bin/cells \
+    && ln -s /home/pydio/app/cells-ctl /bin/cells-ctl
 
-ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["cells", "start"]
