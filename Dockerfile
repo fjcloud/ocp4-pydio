@@ -1,5 +1,6 @@
 # handle certificate and downloads in another stage to reduce image size
 FROM image-registry.openshift-image-registry.svc:5000/openshift/rhel-minimal:latest
+USER root
 
 RUN mkdir -p /app/pydio
 
